@@ -9,13 +9,10 @@ set -o pipefail  # fail if any prior step failed
 
 # Set parameters
 file_name="data/Agrofood_co2_emission.csv"
-file_name_bad="data/Agrofoooood_co2_emission.csv"
 query_column=0
 query_column_bad=-7
-query_column_char="a"
 query_value="United States of America"
-result_column=3
-result_column_bad=1000
+result_column=4
 result_column_non_int=0
 
 # Working example with result column
@@ -24,24 +21,8 @@ python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column \
     --country "$query_value" --fires-column $result_column
 
-# Working example with default result column
-echo "Running print_fires.py with default result column"
-python3 src/print_fires.py \
-    --file-name "$file_name" --country-column $query_column \
-    --country "$query_value"
-
-# Broken example with result column out of range
-set +e  # unset exit on error
-python3 src/print_fires.py \
-    --file-name "$file_name" --country-column $query_column \
-    --country "$query_value" --fires-column $result_column_bad
-
-# Broken example with bad file name
-python3 src/print_fires.py \
-    --file-name "$file_name_bad" --country-column $query_column \
-    --country "$query_value"
-
 # Broken example result column contains non-numerical characters
+set +e  # unset exit on error
 python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column \
     --country "$query_value" --fires-column "$result_column_non_int"
@@ -49,9 +30,4 @@ python3 src/print_fires.py \
 # Broken example with query column out of range (negative)
 python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column_bad \
-    --country "$query_value"
-
-# Broken example with non-integer country column
-python3 src/print_fires.py \
-    --file-name "$file_name" --country-column $query_column_char \
     --country "$query_value"
