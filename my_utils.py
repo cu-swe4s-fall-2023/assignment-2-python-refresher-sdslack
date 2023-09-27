@@ -1,7 +1,7 @@
 """Functions for querying files
 
-    * get_column - returns the requested or default column from the
-    input file with the given query column and query value.
+    * get_column - returns the requested or default column as integers
+    from the input file with the given query column and query value.
 
 """
 
@@ -10,7 +10,7 @@ import sys
 
 def get_column(file_name, query_column, query_value, result_column=1):
     """Queries and returns the requested column or default (column 2)
-    from the input file with the given query column and query value.
+    as integers from input file with the given query column and query value.
 
     Parameters
     ----------
@@ -28,18 +28,27 @@ def get_column(file_name, query_column, query_value, result_column=1):
     result_int : list of int
         List of integer values from the result column
     """
+
+    result = []
+    with open(file_name, 'r') as f:
+        for line in f:
+            line = line.rstrip().split(',')
+            try:
+                line[query_column]
+            except IndexError:
+                print("Query column out of range.")
+                sys.exit(1)
+            try:
+                line[result_column]
+            except IndexError:
+                print("Result column out of range.")
+                sys.exit(1)
+            if line[query_column] == query_value:
+                result.append(line[result_column])
     try:
-        result = []
-        with open(file_name, 'r') as f:
-            for line in f:
-                line = line.rstrip().split(',')
-                if line[query_column] == query_value:
-                    result.append(line[result_column])
-        result_int = [int(round(float(val))) for val in result]
-        return result_int
-    except FileNotFoundError:
-        print("File not found: " + file_name)
+        result = [float(val) for val in result]
+    except ValueError:
+        print("Could not convert result to float, so can't convert to int.")
         sys.exit(1)
-    except PermissionError:
-        print("Could not open: " + file_name)
-        sys.exit(1)
+    result_int = [int(round(float(val))) for val in result]
+    return result_int
