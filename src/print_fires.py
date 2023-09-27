@@ -67,7 +67,19 @@ def run_get_column(args):
     except PermissionError:
         print("Could not open: " + args.file_name)
         sys.exit(1)
+    try:
+        if args.country_column < 0:
+            raise ValueError
+    except ValueError:
+        print("Country column must be positive.")
+        sys.exit(1)
     if args.fires_column is not None:
+        try:
+            if args.fires_column < 0:
+                raise ValueError
+        except ValueError:
+            print("Fires column must be positive.")
+            sys.exit(1)
         fires = utils.get_column(args.file_name,
                                  args.country_column,
                                  args.country,
