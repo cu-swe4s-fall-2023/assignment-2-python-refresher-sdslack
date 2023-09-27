@@ -1,16 +1,41 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/oQi7O4AA)
-# python-refresher
+# Overview
 
-# Updates
+This project's source code enables the user to query a file containing
+fire data by country, returning a user-specified (or default) column
+of data from the file matching the input query.
 
-Function get_column() was implemented to query a user specified column
-and value in given file and return either user specified result column,
-or the default column (column 2 of the file). 
+# Installation
 
-Script print_fires.py was fixed to correctly use get_column function
-and modified to accept all arguments from run.sh.
+Python3 and bash are required to run this project.
 
-# Additions
+This repository can be cloned, and then
+print_fires.py (which imports the functions in my_utils.py) can be
+run using a bash script, like the included example run.sh.
 
-Shell script run.sh was added to pass all input arguments to and then
-run print_fires.py.
+# Usage
+
+The my_utils file contains the following:
+
+```python
+import src/my_utils as utils
+docstring = utils.get_docstring()
+print(docstring)
+```
+
+The print_fires file imports my_utils and requires the following inputs:
+
+```bash
+print("test")
+```
+
+```bash
+python3 src/print_fires.py -h
+```
+
+The bash script run.sh includes three examples of how to use the source
+code. The script and the output of all three tests is as follows:
+
+```bash
+cat run.sh
+bash run.sh
+```
