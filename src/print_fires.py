@@ -92,9 +92,8 @@ def run_get_column(args):
 
 
 if __name__ == '__main__':
-    """
-    Runs run_get_column and prints results.
-    
+    """Runs run_get_column and prints results.
+
     """
     args = get_args()
     print(run_get_column(args))
