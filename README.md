@@ -2,13 +2,13 @@
 
 This project enables querying of a file containing statistics about
 fires for various countries and years. The user can query the input
-file to retrieve information from the default result column for the
-specified country, or the user can choose which result column they
+file to retrieve information from the default result column for a
+chosen country, or the user can choose which result column they
 would like to retrieve information from.
 
 The project source code is written in Python3 but is designed to be
 run using bash from the command line. An example bash script is
-include in the project repository.
+included in the project repository.
 
 ## **Installation**
 
@@ -30,7 +30,7 @@ git clone git@github.com:cu-swe4s-fall-2023/assignment-2-python-refresher-sdslac
 cd assignment-2-python-refresher-sdslack
 ```
 
-3. View the directories within the repository:
+3. View the contents of the repository:
 ```bash
 ls
 ```
@@ -38,7 +38,7 @@ ls
 README.md       run.sh      src/
 ```
 This document is the README.md, run.sh is a bash script that runs
-example (discussed in detail below), and src/ contains the source
+examples (discussed in detail below), and src/ contains the source
 code for this project.
 
 4. Download the example data file 'Agrofood_co2_emission.csv' by copying
@@ -79,8 +79,8 @@ This will run three examples:
 ```bash
 file_name="data/Agrofood_co2_emission.csv"
 query_column=0
-query_column_bad=-7
 query_value="United States of America"
+result_column=4
 
 python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column \
@@ -101,7 +101,7 @@ python3 src/print_fires.py \
     --country "$query_value" --fires-column "$result_column_non_int"
 ```
 
-3. A broken example with the default result column but where the
+3. A broken example returning the default result column but where the
     user-requested query column is out of range of the input file.
 
 ```bash
@@ -162,11 +162,8 @@ The script print_fires.py runs the following functions:
 The run_get_column function in print_fires.py uses the get_column function from
 my_utils.py.
 
-The docustring for the get_column function can be access by running the following:
-
-```python
-python src/my_utils.py --help
-```
+The docustring for the get_column function can be accessed by running the following
+in the Python interpreter:
 
 ```python
 import my_utils
@@ -196,7 +193,7 @@ my_utils.get_column.__doc__
 In more detail, the get_column function takes in the file name to
 query, the column number to query (the column containing country names)
 for the query value (the country name to query), and optionally the
-column number with the results to return. If the result column is not
-specificed, the default column (column 1) is returned. Because
+column number with results to return. If the result column is not
+specified, the default column (column 1) is returned. Because
 get_column converts the data to be returned to integers, it is not
 possible to select a result column that is non-numeric.
