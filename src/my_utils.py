@@ -9,7 +9,7 @@ import sys
 
 
 def get_column(file_name, query_column, query_value, result_column=1):
-    """Queries and returns the requested column or default (column 2)
+    """Queries and returns the requested column or default (column 1)
     as integers from input file with the given query column and query value.
 
     Parameters
