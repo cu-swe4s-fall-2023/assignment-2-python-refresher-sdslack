@@ -1,18 +1,65 @@
 ## **Overview**
 
-This project's source code enables the user to query a file containing
-fire data by country, returning a user-specified (or default) column
-of data from the file matching the input query.
+This project enables querying of a file containing statistics about
+fires for various countries and years. The user can query the input
+file to retrieve information from the default result column for the
+specified country, or the user can choose which result column they
+would like to retrieve information from.
 
-TODO: add a little more here!
+The project source code is written in Python3 but is designed to be
+run using bash from the command line. An example bash script is
+include in the project repository.
 
 ## **Installation**
 
-Python3 and bash are required to run this project.
+### Dependencies
 
-This repository can be cloned, and then
-print_fires.py (which imports the functions in my_utils.py) can be
-run using a bash script, like the included example run.sh.
+Python3 and bash are required to run the code in this project.
+
+### Step by Step Installation Instructions
+
+1. Clone this repository to your local machine:
+
+```bash
+git clone git@github.com:cu-swe4s-fall-2023/assignment-2-python-refresher-sdslack.git
+```
+
+2. Navigate to the directory containing the cloned repository:
+
+```bash
+cd assignment-2-python-refresher-sdslack
+```
+
+3. View the directories within the repository:
+```bash
+ls
+```
+```
+README.md       run.sh      src/
+```
+This document is the README.md, run.sh is a bash script that runs
+example (discussed in detail below), and src/ contains the source
+code for this project.
+
+4. Download the example data file 'Agrofood_co2_emission.csv' by copying
+    and pasting the following link into your browser and manually pressing
+    download:
+
+https://drive.google.com/file/d/1Wytf3ryf9EtOwaloms8HEzLG0yjtRqxr/view?usp=drive_link
+
+5. Create a data/ directory within the cloned repository, and move the
+    downloaded file from your Downloads/ directory to the data/ directory:
+
+```bash
+mkdir data
+mv ~/Downloads/Agrofood_co2_emission.csv data/
+```
+
+6. Finally, run the example bash script:
+
+```bash
+bash run.sh
+```
 
 ## **Usage**
 
@@ -145,3 +192,11 @@ my_utils.get_column.__doc__
     result_int : list of int
         List of integer values from the result column
 ```
+
+In more detail, the get_column function takes in the file name to
+query, the column number to query (the column containing country names)
+for the query value (the country name to query), and optionally the
+column number with the results to return. If the result column is not
+specificed, the default column (column 1) is returned. Because
+get_column converts the data to be returned to integers, it is not
+possible to select a result column that is non-numeric.
