@@ -91,10 +91,10 @@ def get_median(int_list):
     """
     int_list.sort()
     if len(int_list) % 2 == 0:
-        median = (int_list[len(int_list) / 2] +
-                  int_list[len(int_list) / 2 + 1]) / 2
+        median = (int_list[len(int_list) // 2] +
+                  int_list[len(int_list) // 2 - 1]) / 2
     else:
-        median = int_list[math.ceil(len(int_list) / 2)]
+        median = int_list[len(int_list) // 2]
     return median
 
 def get_std_dev(int_list):
