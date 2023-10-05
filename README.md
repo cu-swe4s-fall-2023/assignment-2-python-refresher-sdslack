@@ -16,6 +16,21 @@ included in the project repository.
 
 Python3 and bash are required to run the code in this project.
 
+The example bash script run.sh should be executed from the top level of
+the repository.
+
+The unit tests and functional tests (located at test/unit/ and test/func,
+respectively) should be executed from the top level of the repository.
+
+In order to run the functional test code, wget is required as it is used
+to install the Stupid Simple Bash Testing Framework. Wget can be installed
+into a conda environment with the following code:
+
+```bash
+conda activate env-name
+conda install -c anaconda wget
+```
+
 ### Step by Step Installation Instructions
 
 1. Clone this repository to your local machine:
@@ -65,14 +80,14 @@ bash run.sh
 
 ### Examples
 
-The bash script run.sh includes three examples of how to use the source
+The bash script run.sh includes four examples of how to use the source
 code. The script can be run with the following code:
 
 ```bash
 bash run.sh
 ```
 
-This will run three examples:
+This will run four examples:
 
 1. A working example with a user-defined result column to query.
 
@@ -114,6 +129,23 @@ python3 src/print_fires.py \
     --country "$query_value"
 ```
 
+4. A working example that prints mean of the user-defined result column
+to query.
+
+```bash
+file_name="data/Agrofood_co2_emission.csv"
+query_column=0
+query_value="United States of America"
+result_column=4
+result_function="mean"
+
+python3 src/print_fires.py \
+    --file-name "$file_name" --country-column $query_column \
+    --country "$query_value" --fires-column $result_column \
+    --summary_function "$result_function"
+
+```
+
 ### Script and Function Details
 
 The example bash script runs print_fires.py. The usage of print_fires.py can be
@@ -123,10 +155,12 @@ seen by running the following code:
 python src/print_fires.py --help
 ```
 ```python
-usage: print_fires [-h] --file-name FILE_NAME --country-column COUNTRY_COLUMN --country COUNTRY
-                   [--fires-column FIRES_COLUMN]
+usage: print_fires [-h] --file-name FILE_NAME --country-column COUNTRY_COLUMN
+                    --country COUNTRY [--fires-column FIRES_COLUMN]
+                   [--summary_function SUMMARY_FUNCTION]
 
-Print results queired from the input file for the given country. Default prints fires column.
+Print results queired from the input file for the given country. Default prints fires column
+and does not summarize the results (prints integer list of all results).
 
 options:
   -h, --help            show this help message and exit
@@ -137,6 +171,8 @@ options:
   --country COUNTRY     Country to search
   --fires-column FIRES_COLUMN
                         Column number to query from the file
+  --summary_function SUMMARY_FUNCTION
+                        Function to summarize results, use "mean", "median", or "std_dev"
 ```
 
 In more detail, the inputs to print_fires.py are as follows:
@@ -152,15 +188,19 @@ In more detail, the inputs to print_fires.py are as follows:
     names column.
 + fires-column (optional) - the integer column number to query results from in
     the input file. The default value is 1. To note: the first column is column 0.
++ summary_function (optional) - the string name of the function to summarize the
+    results from the input file. The default is to not summarize and to return
+    a list of integers. The options are "mean", "median", and "std_dev".
 
 The script print_fires.py runs the following functions:
 
 + get_args - gets command line arguments.
-+ run_get_column - runs get_column from my_utils.
++ run_get_column - runs get_column from my_utils, optionally also running summary
+    functions from my_utils.
 + main - runs run_get_column and prints results.
 
 The run_get_column function in print_fires.py uses the get_column function from
-my_utils.py.
+and summary functions get_mean, get_median, and get_std_dev from my_utils.py.
 
 The docustring for the get_column function can be accessed by running the following
 in the Python interpreter:
@@ -197,3 +237,60 @@ column number with results to return. If the result column is not
 specified, the default column (column 1) is returned. Because
 get_column converts the data to be returned to integers, it is not
 possible to select a result column that is non-numeric.
+
+The docustring for the summary functions can be accessed by running the following
+in the Python interpreter, once inside the src/ directory:
+
+```python
+import my_utils
+my_utils.get_mean.__doc__
+```
+```python
+    Returns the mean of a list of integers.
+
+    Parameters
+    ----------
+    int_list : list of int
+        List of integers
+
+    Returns
+    -------
+    mean : float
+        Mean of the list of integers
+```
+
+```python
+import my_utils
+my_utils.get_median.__doc__
+```
+```python
+    Returns the median of a list of integers.
+
+    Parameters
+    ----------
+    int_list : list of int
+        List of integers
+
+    Returns
+    -------
+    median : float
+        Median of the list of integers
+```
+
+```python
+import my_utils
+my_utils.get_std_dev.__doc__
+```
+```python
+    Returns the standard deviation of a list of integers.
+
+    Parameters
+    ----------
+    int_list : list of int
+        List of integers
+
+    Returns
+    -------
+    std_dev : float
+        Standard deviation of the list of integers
+```

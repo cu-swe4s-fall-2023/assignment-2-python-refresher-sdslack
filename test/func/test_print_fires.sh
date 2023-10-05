@@ -40,3 +40,36 @@ run print_fires_query_col_neg python src/print_fires.py \
     --country "United States of America"
 assert_exit_code 1
 assert_stdout "Query column must be positive."
+
+run print_fires_with_mean python src/print_fires.py \
+    --file-name "test/data/test.csv" \
+    --country-column 0 \
+    --country "Zimbabwe" \
+    --summary_function "mean"
+assert_exit_code 0
+assert_in_stdout 1991
+
+run print_fires_with_median python src/print_fires.py \
+    --file-name "test/data/test.csv" \
+    --country-column 0 \
+    --country "Belize" \
+    --summary_function "median"
+assert_exit_code 0
+assert_in_stdout 1991
+
+run print_fires_with_bad_summary python src/print_fires.py \
+    --file-name "test/data/test.csv" \
+    --country-column 0 \
+    --country "Zimbabwe" \
+    --summary_function "mode"
+assert_exit_code 1
+assert_stdout "Summary function must be "mean", "median", or "std_dev"."
+
+run print_fires_res_non_numeric_with_mean python src/print_fires.py \
+    --file-name "test/data/test.csv" \
+    --country-column 0 \
+    --country "United States of America" \
+    --fires-column 0 \
+    --summary_function "mean"
+assert_exit_code 1
+assert_stdout "Could not convert result to float, so can't convert to int."
