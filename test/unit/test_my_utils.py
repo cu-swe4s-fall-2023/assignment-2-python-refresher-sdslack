@@ -13,6 +13,9 @@ class TestMyUtils(unittest.TestCase):
         r = my_utils.get_mean([a, b])
         self.assertEqual(r, (a + b) / 2)
     
+    def test_get_mean_empty(self):
+        self.assertRaises(SystemExit, my_utils.get_mean, [])
+    
     def test_get_mean_equal(self):
         random.seed(1)
         a = random.randint(0, 100)
