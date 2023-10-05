@@ -41,6 +41,10 @@ def get_args():
                         type=int,
                         required=False,
                         help='Column number to query from the file')
+    parser.add_argument('--summary_function',
+                        type=str,
+                        required=False,
+                        help='Function to summarize the results, use "mean", "median", or "std_dev"')
     args = parser.parse_args()
     return args
 
@@ -71,14 +75,14 @@ def run_get_column(args):
         if args.country_column < 0:
             raise ValueError
     except ValueError:
-        print("Country column must be positive.")
+        print('Country column must be positive.')
         sys.exit(1)
     if args.fires_column is not None:
         try:
             if args.fires_column < 0:
                 raise ValueError
         except ValueError:
-            print("Fires column must be positive.")
+            print('Fires column must be positive.')
             sys.exit(1)
         fires = utils.get_column(args.file_name,
                                  args.country_column,
@@ -88,8 +92,20 @@ def run_get_column(args):
         fires = utils.get_column(args.file_name,
                                  args.country_column,
                                  args.country)
+    if args.summary_function is not None:
+        try:
+            if args.summary_function not in ['mean', 'median', 'std_dev']:
+                raise ValueError
+        except ValueError:
+            print('Summary function must be "mean", "median", or "std_dev".')
+            sys.exit(1)
+        if args.summary_function == 'mean':
+            fires = utils.get_mean(fires)
+        elif args.summary_function == 'median':
+            fires = utils.get_median(fires)
+        elif args.summary_function == 'std_dev':
+            fires = utils.get_std_dev(fires)
     return fires
-
 
 if __name__ == '__main__':
     """Runs run_get_column and prints results.
