@@ -16,6 +16,21 @@ included in the project repository.
 
 Python3 and bash are required to run the code in this project.
 
+The example bash script run.sh should be executed from the top level of
+the repository.
+
+The unit tests and functional tests (located at test/unit/ and test/func,
+respectively) should be executed from the top level of the repository.
+
+In order to run the functional test code, wget is required as it is used
+to install the Stupid Simple Bash Testing Framework. Wget can be installed
+into a conda environment with the following code:
+
+```bash
+conda activate env-name
+conda install -c anaconda wget
+```
+
 ### Step by Step Installation Instructions
 
 1. Clone this repository to your local machine:
@@ -65,14 +80,14 @@ bash run.sh
 
 ### Examples
 
-The bash script run.sh includes three examples of how to use the source
+The bash script run.sh includes four examples of how to use the source
 code. The script can be run with the following code:
 
 ```bash
 bash run.sh
 ```
 
-This will run three examples:
+This will run four examples:
 
 1. A working example with a user-defined result column to query.
 
@@ -112,6 +127,23 @@ query_value="United States of America"
 python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column_bad \
     --country "$query_value"
+```
+
+4. A working example that prints mean of the user-defined result column
+to query.
+
+```bash
+file_name="data/Agrofood_co2_emission.csv"
+query_column=0
+query_value="United States of America"
+result_column=4
+result_function="mean"
+
+python3 src/print_fires.py \
+    --file-name "$file_name" --country-column $query_column \
+    --country "$query_value" --fires-column $result_column \
+    --summary_function "$result_function"
+
 ```
 
 ### Script and Function Details
