@@ -155,10 +155,12 @@ seen by running the following code:
 python src/print_fires.py --help
 ```
 ```python
-usage: print_fires [-h] --file-name FILE_NAME --country-column COUNTRY_COLUMN --country COUNTRY
-                   [--fires-column FIRES_COLUMN]
+usage: print_fires [-h] --file-name FILE_NAME --country-column COUNTRY_COLUMN
+                    --country COUNTRY [--fires-column FIRES_COLUMN]
+                   [--summary_function SUMMARY_FUNCTION]
 
-Print results queired from the input file for the given country. Default prints fires column.
+Print results queired from the input file for the given country. Default prints fires column
+and does not summarize the results (prints integer list of all results).
 
 options:
   -h, --help            show this help message and exit
@@ -169,6 +171,8 @@ options:
   --country COUNTRY     Country to search
   --fires-column FIRES_COLUMN
                         Column number to query from the file
+  --summary_function SUMMARY_FUNCTION
+                        Function to summarize results, use "mean", "median", or "std_dev"
 ```
 
 In more detail, the inputs to print_fires.py are as follows:
@@ -184,15 +188,19 @@ In more detail, the inputs to print_fires.py are as follows:
     names column.
 + fires-column (optional) - the integer column number to query results from in
     the input file. The default value is 1. To note: the first column is column 0.
++ summary_function (optional) - the string name of the function to summarize the
+    results from the input file. The default is to not summarize and to return
+    a list of integers. The options are "mean", "median", and "std_dev".
 
 The script print_fires.py runs the following functions:
 
 + get_args - gets command line arguments.
-+ run_get_column - runs get_column from my_utils.
++ run_get_column - runs get_column from my_utils, optionally also running summary
+    functions from my_utils.
 + main - runs run_get_column and prints results.
 
 The run_get_column function in print_fires.py uses the get_column function from
-my_utils.py.
+and summary functions get_mean, get_median, and get_std_dev from my_utils.py.
 
 The docustring for the get_column function can be accessed by running the following
 in the Python interpreter:
@@ -229,3 +237,60 @@ column number with results to return. If the result column is not
 specified, the default column (column 1) is returned. Because
 get_column converts the data to be returned to integers, it is not
 possible to select a result column that is non-numeric.
+
+The docustring for the summary functions can be accessed by running the following
+in the Python interpreter, once inside the src/ directory:
+
+```python
+import my_utils
+my_utils.get_mean.__doc__
+```
+```python
+    Returns the mean of a list of integers.
+
+    Parameters
+    ----------
+    int_list : list of int
+        List of integers
+
+    Returns
+    -------
+    mean : float
+        Mean of the list of integers
+```
+
+```python
+import my_utils
+my_utils.get_median.__doc__
+```
+```python
+    Returns the median of a list of integers.
+
+    Parameters
+    ----------
+    int_list : list of int
+        List of integers
+
+    Returns
+    -------
+    median : float
+        Median of the list of integers
+```
+
+```python
+import my_utils
+my_utils.get_std_dev.__doc__
+```
+```python
+    Returns the standard deviation of a list of integers.
+
+    Parameters
+    ----------
+    int_list : list of int
+        List of integers
+
+    Returns
+    -------
+    std_dev : float
+        Standard deviation of the list of integers
+```
