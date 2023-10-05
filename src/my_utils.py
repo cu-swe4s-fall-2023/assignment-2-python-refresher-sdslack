@@ -73,11 +73,6 @@ def get_mean(int_list):
         Mean of the list of integers
 
     """
-    try:
-        int_list[0]
-    except IndexError:
-        print("List is empty.")
-        sys.exit(1)
     mean = sum(int_list) / len(int_list)
     return mean
 
@@ -96,16 +91,6 @@ def get_median(int_list):
         Median of the list of integers
 
     """
-    try:
-        int_list[0]
-    except IndexError:
-        print("List is empty.")
-        sys.exit(1)
-    try:
-        result = [float(val) for val in int_list]
-    except ValueError:
-        print("List contains non-numeric values.")
-        sys.exit(1)
     int_list.sort()
     if len(int_list) % 2 == 0:
         median = (int_list[len(int_list) // 2] +
@@ -129,11 +114,6 @@ def get_std_dev(int_list):
         Standard deviation of the list of integers
 
     """
-    try:
-        int_list[0]
-    except IndexError:
-        print("List is empty.")
-        sys.exit(1)
     mean = get_mean(int_list)
     devs_sq = [(val - mean) ** 2 for val in int_list]
     devs_sq_mean = get_mean(devs_sq)

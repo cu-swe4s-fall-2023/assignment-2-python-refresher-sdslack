@@ -107,6 +107,11 @@ def run_get_column(args):
         except ValueError:
             print('Summary function must be "mean", "median", or "std_dev".')
             sys.exit(1)
+        try:
+            fires[0]
+        except IndexError:
+            print("Result list is empty.")
+            sys.exit(1)
         if args.summary_function == 'mean':
             fire_sum = utils.get_mean(fires)
         elif args.summary_function == 'median':
