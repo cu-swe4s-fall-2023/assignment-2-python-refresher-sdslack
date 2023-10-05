@@ -1,7 +1,8 @@
 """Queries and prints column specificed by user input
 
         * get_args - gets command line arguments.
-        * run_get_column - runs get_column from my_utils.
+        * run_get_column - runs get_column from my_utils, optionally
+        also running summary functions from my_utils.
         * main - runs run_get_column and prints results.
 
 """
@@ -21,8 +22,8 @@ def get_args():
 
     """
     parser = argparse.ArgumentParser(
-        description=('Print results queired from the input file for the '
-                     'given country. Default prints fires column.'),
+        description=('Default prints fires column and does not summarize'
+                     'the results (prints integer list of all results).'),
         prog='print_fires'
     )
     parser.add_argument('--file-name',
@@ -44,13 +45,15 @@ def get_args():
     parser.add_argument('--summary_function',
                         type=str,
                         required=False,
-                        help='Function to summarize the results, use "mean", "median", or "std_dev"')
+                        help='Function to summarize results, '
+                             'use "mean", "median", or "std_dev"')
     args = parser.parse_args()
     return args
 
 
 def run_get_column(args):
-    """Runs get_column from my_utils.
+    """Runs get_column from my_utils, optionally also running summary
+    functions from my_utils.
 
     Parameters
     ----------
@@ -61,6 +64,9 @@ def run_get_column(args):
     -------
     fires : list of int
         List of integers from the fires column
+
+    fires_sum : float
+        Summarized results from fires column
 
     """
     try:
@@ -92,7 +98,9 @@ def run_get_column(args):
         fires = utils.get_column(args.file_name,
                                  args.country_column,
                                  args.country)
-    if args.summary_function is not None:
+    if args.summary_function is None:
+        return fires
+    else:
         try:
             if args.summary_function not in ['mean', 'median', 'std_dev']:
                 raise ValueError
@@ -100,12 +108,13 @@ def run_get_column(args):
             print('Summary function must be "mean", "median", or "std_dev".')
             sys.exit(1)
         if args.summary_function == 'mean':
-            fires = utils.get_mean(fires)
+            fire_sum = utils.get_mean(fires)
         elif args.summary_function == 'median':
-            fires = utils.get_median(fires)
+            fire_sum = utils.get_median(fires)
         elif args.summary_function == 'std_dev':
-            fires = utils.get_std_dev(fires)
-    return fires
+            fire_sum = utils.get_std_dev(fires)
+        return fire_sum
+
 
 if __name__ == '__main__':
     """Runs run_get_column and prints results.
