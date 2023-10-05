@@ -58,6 +58,7 @@ def get_column(file_name, query_column, query_value, result_column=1):
     result_int = [int(round(float(val))) for val in result]
     return result_int
 
+
 def get_mean(int_list):
     """Returns the mean of a list of integers.
 
@@ -72,8 +73,14 @@ def get_mean(int_list):
         Mean of the list of integers
 
     """
+    try:
+        int_list[0]
+    except IndexError:
+        print("List is empty.")
+        sys.exit(1)
     mean = sum(int_list) / len(int_list)
     return mean
+
 
 def get_median(int_list):
     """Returns the median of a list of integers.
@@ -89,6 +96,16 @@ def get_median(int_list):
         Median of the list of integers
 
     """
+    try:
+        int_list[0]
+    except IndexError:
+        print("List is empty.")
+        sys.exit(1)
+    try:
+        result = [float(val) for val in int_list]
+    except ValueError:
+        print("List contains non-numeric values.")
+        sys.exit(1)
     int_list.sort()
     if len(int_list) % 2 == 0:
         median = (int_list[len(int_list) // 2] +
@@ -96,6 +113,7 @@ def get_median(int_list):
     else:
         median = int_list[len(int_list) // 2]
     return median
+
 
 def get_std_dev(int_list):
     """Returns the standard deviation of a list of integers.
@@ -111,6 +129,11 @@ def get_std_dev(int_list):
         Standard deviation of the list of integers
 
     """
+    try:
+        int_list[0]
+    except IndexError:
+        print("List is empty.")
+        sys.exit(1)
     mean = get_mean(int_list)
     devs_sq = [(val - mean) ** 2 for val in int_list]
     devs_sq_mean = get_mean(devs_sq)
