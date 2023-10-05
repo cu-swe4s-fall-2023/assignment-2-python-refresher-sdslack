@@ -72,8 +72,14 @@ def get_mean(int_list):
         Mean of the list of integers
 
     """
-    mean = sum(int_list) / len(int_list)
-    return mean
+    try:
+        int_list[0]
+    except IndexError:
+        print("List is empty.")
+        sys.exit(1)
+    else:
+        mean = sum(int_list) / len(int_list)
+        return mean
 
 def get_median(int_list):
     """Returns the median of a list of integers.
