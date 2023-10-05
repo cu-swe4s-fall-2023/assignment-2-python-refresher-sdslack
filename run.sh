@@ -17,23 +17,26 @@ result_column_non_int=0
 result_function="mean"
 
 # Working example with result column
-echo "Running print_fires.py with result column $result_column"
+echo "Working example of print_fires.py with result column $result_column:"
 python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column \
     --country "$query_value" --fires-column $result_column
 
 # Broken example result column contains non-numerical characters
 set +e  # unset exit on error
+echo "Broken example of print_fires.py with result column $result_column_non_int that constains non-numerical characters:"
 python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column \
     --country "$query_value" --fires-column "$result_column_non_int"
 
 # Broken example with query column out of range (negative)
+echo "Broken example of print_fires.py with query column $result_column out of range:"
 python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column_bad \
     --country "$query_value"
 
 # Working example that prints mean of result column
+echo "Working example of print_fires.py with result function $result_function that summarizes result list:"
 python3 src/print_fires.py \
     --file-name "$file_name" --country-column $query_column \
     --country "$query_value" --fires-column $result_column \

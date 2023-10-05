@@ -1,5 +1,3 @@
-from contextlib import AbstractContextManager
-from typing import Any
 import unittest
 import sys
 import random
@@ -44,7 +42,7 @@ class TestMyUtils(unittest.TestCase):
         self.assertEqual(r, (a + b) / 2)
 
     def test_get_mean_empty(self):
-        self.assertRaises(SystemExit, my_utils.get_mean, [])
+        self.assertRaises(ZeroDivisionError, my_utils.get_mean, [])
 
     def test_get_mean_equal(self):
         random.seed(1)
@@ -70,10 +68,10 @@ class TestMyUtils(unittest.TestCase):
         self.assertEqual(r, (b + c) / 2)
 
     def test_get_median_empty(self):
-        self.assertRaises(SystemExit, my_utils.get_median, [])
+        self.assertRaises(IndexError, my_utils.get_median, [])
 
     def test_get_median_chr(self):
-        self.assertRaises(SystemExit, my_utils.get_median, [1, 2, 'a'])
+        self.assertRaises(TypeError, my_utils.get_median, [1, 2, 'a'])
 
     def test_get_median_dbl(self):
         a = random.uniform(0, 20)
@@ -107,7 +105,7 @@ class TestMyUtils(unittest.TestCase):
         self.assertNotEqual(r, 0)
 
     def test_get_std_dev_empty(self):
-        self.assertRaises(SystemExit, my_utils.get_std_dev, [])
+        self.assertRaises(ZeroDivisionError, my_utils.get_std_dev, [])
 
 
 if __name__ == '__main__':
