@@ -19,17 +19,15 @@ Python3 and bash are required to run the code in this project.
 The example bash script run.sh should be executed from the top level of
 the repository.
 
-The unit tests and functional tests (located at test/unit/ and test/func,
-respectively) should be executed from the top level of the repository.
+Unit tests (located at test/unit), functional tests (test/func), and style
+tests for python (PEP8, tested using pycodestyle), are executed when
+any branch is pushed to the GitHub-hosted repository as well as when a pull
+request is made on the main branch on GitHub. 
 
-In order to run the functional test code, wget is required as it is used
-to install the Stupid Simple Bash Testing Framework. Wget can be installed
-into a conda environment with the following code:
-
-```bash
-conda activate env-name
-conda install -c anaconda wget
-```
+The style tests set up mamba environment "csci6118" using its environment
+file at test/etc/csci6118_env.yml in order to use the pycodestyle program.
+The functional tests use the Stupid Simple Bash Testing Framework, which
+is automatically downloaded when the tests are executed on GitHub.
 
 ### Step by Step Installation Instructions
 
