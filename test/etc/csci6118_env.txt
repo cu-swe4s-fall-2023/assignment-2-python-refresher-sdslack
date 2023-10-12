@@ -1,0 +1,11 @@
+name: csci6118
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python
+  - pycodestyle
+  - wget
+  - ca-certificates
+  - openssl
+prefix: /Users/slacksa/miniconda3/envs/csci6118
