@@ -2,7 +2,7 @@ import unittest
 import sys
 import random
 import os
-sys.path.insert(0, 'src')
+sys.path.insert(0, '../../src')
 import my_utils
 
 
