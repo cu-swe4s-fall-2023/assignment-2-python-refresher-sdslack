@@ -38,7 +38,7 @@ jobs:
       steps:
          - uses: actions/checkout@v2
          - uses: mamba-org/setup-micromamba@v1
-            with:
+           with:
                environment-file: test/etc/csci6118_env.yml
                activate-environment: csci6118
          - run: |
