@@ -13,3 +13,10 @@ jobs:
             cd test/unit
             python -m unittest test_my_utils
 
+   run_func_tests:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v2
+         - run: |
+            cd test/func
+            bash test_print_fires.sh
