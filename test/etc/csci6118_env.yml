@@ -8,4 +8,3 @@ dependencies:
   - wget
   - ca-certificates
   - openssl
-prefix: /Users/slacksa/miniconda3/envs/csci6118
