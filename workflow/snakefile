@@ -1,24 +1,23 @@
-RESULT_COLS = [0, 1]
+COUNTRIES = ["China", "India", "United States of America", "Indonesia", "Pakistan"]
 
 rule all:
     input:
-        expand("test_fires_result_col{col}_hist.png", col = RESULT_COLS)
+        expand("sci_pres_snake/{country}_total_emissions_hist.png", country = COUNTRIES)
 
 rule make_data_file:
     input:
         "data/Agrofood_co2_emission.csv"
     output:
-        "test_fires_result_col{x}.txt"
+        "data/snake/{x}_total_emissions.txt"
     shell:
-        "python3 src/print_fires.py --file-name {input} --country-column {wildcards.x} " \
-        + "--country 'United States of America' --write-file {output}"
+        "python3 src/print_fires.py --file-name {input} --country-column 0 " \
+        + "--country '{wildcards.x}' --fires-column 29 --write-file '{output}'"
 
 rule plot_data_hist:
     input:
-        "test_fires_result_col{x}.txt"
+        "data/snake/{x}_total_emissions.txt"
     output:
-        "test_fires_result_col{x}_hist.png"
+        "sci_pres_snake/{x}_total_emissions_hist.png"
     shell:
-        "python3 src/plot_fires.py --file-name {input} --title title " \
-        + "--x-label x --y-label y"
-
+        "python3 src/plot_fires.py --file-name '{input}' --output-path sci_pres_snake/ " \
+        + "--title '{wildcards.x}' --x-label 'Total Emissions' --y-label Count"
