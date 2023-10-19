@@ -47,6 +47,10 @@ def get_args():
                         required=False,
                         help='Function to summarize results, '
                              'use "mean", "median", or "std_dev"')
+    parser.add_argument('--write-file',
+                        type=str,
+                        required=False,
+                        help='Option to write results to file')
     args = parser.parse_args()
     return args
 
@@ -99,7 +103,15 @@ def run_get_column(args):
                                  args.country_column,
                                  args.country)
     if args.summary_function is None:
-        return fires
+        if args.write_file is not None:
+            try:
+                utils.write_file(fires, args.write_file)
+            except PermissionError:
+                print("Could not write out file")
+                sys.exit(1)
+            return fires
+        else:
+            return fires
     else:
         try:
             if args.summary_function not in ['mean', 'median', 'std_dev']:
@@ -118,7 +130,15 @@ def run_get_column(args):
             fire_sum = utils.get_median(fires)
         elif args.summary_function == 'std_dev':
             fire_sum = utils.get_std_dev(fires)
-        return fire_sum
+        if args.write_file is not None:
+            try:
+                utils.write_file(fire_sum, args.write_file)
+            except PermissionError:
+                print("Could not write out file")
+                sys.exit(1)
+            return fire_sum
+        else:
+            return fire_sum
 
 
 if __name__ == '__main__':
