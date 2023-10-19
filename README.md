@@ -356,3 +356,12 @@ The results were generated two different ways:
 
 2. Using the snakefile under workflow/snakefile
 
++ The snakefile was used to run the same analysis for all countries by expanding
+  the rule all to include the final PNG file output name for all countries.
++ The first rule make_data_file only ran if the raw CSV data is present. It used
+    print_fires.py to query the total emissions for each country for each year
+    included in the data file. The results were written to a file for each country.
++ The second rule plot_data_hist only ran if the query files for each country were
+    found. It used plot_fires.py to plot the distribution of total emissions for
+    each country for all years included in the data file. The plots were written
+    to the sci_pres_snake/ directory.
