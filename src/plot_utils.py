@@ -42,4 +42,5 @@ def plot_hist(file_name, output_path, x_label, y_label, title):
 
     file_name_no_path = os.path.basename(file_name)
     base_file_name = os.path.splitext(file_name_no_path)[0]
-    plt.savefig(output_path + base_file_name + '_hist.png', bbox_inches='tight')
+    plt.savefig(output_path + base_file_name + '_hist.png',
+                bbox_inches='tight')
