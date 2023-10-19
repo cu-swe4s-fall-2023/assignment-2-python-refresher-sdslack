@@ -408,7 +408,7 @@ the five countries for all years included in the data file.
 
 ![India](sci_pres/India_total_emissions_hist.png)
 
-![United States of America](sci_pres/United States of America_total_emissions_hist.png)
+!['United States of America']('sci_pres/United States of America_total_emissions_hist.png')
 
 ![Indonesia](sci_pres/Indonesia_total_emissions_hist.png)
 
