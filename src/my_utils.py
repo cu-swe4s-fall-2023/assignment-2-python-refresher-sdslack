@@ -121,6 +121,7 @@ def get_std_dev(int_list):
     std_dev = math.sqrt(devs_sq_mean)
     return std_dev
 
+
 def write_file(int_list, file_name):
     """Writes a list of integers to a file.
 

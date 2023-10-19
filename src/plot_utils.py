@@ -6,8 +6,9 @@
 
 import os
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('Agg')  # noqa
 import matplotlib.pyplot as plt
+
 
 def plot_hist(file_name, x_label, y_label, title):
     """Plots histogram of values in a file. Writes out as .png.
@@ -27,7 +28,7 @@ def plot_hist(file_name, x_label, y_label, title):
     data = []
     for line in open(file_name):
         data.append(line.rstrip())  # assumes input has one column
- 
+
     fig, ax = plt.subplots()
     ax.hist(data)
     ax.spines['top'].set_visible(False)

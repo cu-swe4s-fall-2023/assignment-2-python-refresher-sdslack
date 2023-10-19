@@ -9,6 +9,7 @@ import plot_utils as plot_utils
 import argparse
 import sys
 
+
 def get_args():
     """Get command line arguments.
 
@@ -41,6 +42,7 @@ def get_args():
     args = parser.parse_args()
     return args
 
+
 def run_plot_hist(args):
     """Runs plot_hist from plot_utils.
 
@@ -58,7 +60,8 @@ def run_plot_hist(args):
     except PermissionError:
         print("Could not open: " + args.file_name)
         sys.exit(1)
-    plot_utils.plot_hist(args.file_name, args.x_label, args.y_label, args.title)
+    plot_utils.plot_hist(args.file_name, args.x_label,
+                         args.y_label, args.title)
 
 
 if __name__ == '__main__':
