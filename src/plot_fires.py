@@ -27,6 +27,10 @@ def get_args():
                         type=str,
                         required=True,
                         help='Name of file with query results')
+    parser.add_argument('--output-path',
+                        type=str,
+                        required=True,
+                        help='Path to write output file to')
     parser.add_argument('--title',
                         type=str,
                         required=True,
@@ -60,8 +64,8 @@ def run_plot_hist(args):
     except PermissionError:
         print("Could not open: " + args.file_name)
         sys.exit(1)
-    plot_utils.plot_hist(args.file_name, args.x_label,
-                         args.y_label, args.title)
+    plot_utils.plot_hist(args.file_name, args.output_path,
+                         args.x_label, args.y_label, args.title)
 
 
 if __name__ == '__main__':

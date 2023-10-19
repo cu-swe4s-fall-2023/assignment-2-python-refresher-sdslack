@@ -292,3 +292,67 @@ my_utils.get_std_dev.__doc__
     std_dev : float
         Standard deviation of the list of integers
 ```
+
+## **Small Scientific Presentation**
+
+### Introduction
+
+Using the CO2 emission data in the Agrofood_co2_emission.csv (see above
+for download instructions), I compared the distribution of total emissions for
+all years included in the data from the top five largest countries by population
+as of July 2023 according to the United States Census Bureau:
+
+    1. China
+    2. India
+    3. United States of America
+    4. Indonesia
+    5. Pakistan
+
+Reference: https://www.census.gov/popclock/world
+
+### Results
+
+The following figures show the distribution of total emissions for each of
+the five countries for all years included in the data file.
+
+China:
+![China](sci_pres/China.png)
+
+India:
+![India](sci_pres/India.png)
+
+United States of America:
+![United States of America](sci_pres/United_States_of_America.png)
+
+Indonesia:
+![Indonesia](sci_pres/Indonesia.png)
+
+Pakistan:
+![Pakistan](sci_pres/Pakistan.png)
+
+**Conclusions:** China had the highest distribution of yearly-reported total
+emissions, although India, Indonesia, and the United States were all on the
+same scale of magnitude. Pakistan had a much lower distribution of yearly-reported
+total emissions.
+
+**Limitations:** The current work did not include any statistical analysis of the
+difference between Pakistan and the other four countries. Additionally, the years
+included in the plots were not standardized across all countries and therefore may
+have some variation.
+
+### Methods
+
+The results were generated two different ways:
+
+1. Using the bash script run_sci_pres.sh
+
++ Bash scripting was used to loop over the five countries for each step of analysis
++ The first step of analysis used print_fires.py to query the total emissions for
+    each country for each year included in the data file. The results were written
+    to a file for each country.
++ The second step of analysis used plot_fires.py to plot the distribution of total
+    emissions for each country for all years included in the data file. The plots
+    were written to the sci_pres/ directory.
+
+2. Using the snakefile under workflow/snakefile
+
