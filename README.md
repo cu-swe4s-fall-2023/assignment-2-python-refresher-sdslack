@@ -404,19 +404,14 @@ Reference: https://www.census.gov/popclock/world
 The following figures show the distribution of total emissions for each of
 the five countries for all years included in the data file.
 
-China:
 ![China](sci_pres/China_total_emissions_hist.png)
 
-India:
 ![India](sci_pres/India_total_emissions_hist.png)
 
-United States of America:
-![United States of America](sci_pres/United_States_of_America_total_emissions_hist.png)
+![United States of America](sci_pres/United States of America_total_emissions_hist.png)
 
-Indonesia:
 ![Indonesia](sci_pres/Indonesia_total_emissions_hist.png)
 
-Pakistan:
 ![Pakistan](sci_pres/Pakistan_total_emissions_hist.png)
 
 **Conclusions:** China had the highest distribution of yearly-reported total
