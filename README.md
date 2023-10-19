@@ -144,7 +144,7 @@ python3 src/print_fires.py \
 
 ```
 
-### Script and Function Details
+### Script and Function Details - Querying
 
 The example bash script runs print_fires.py. The usage of print_fires.py can be
 seen by running the following code:
@@ -153,12 +153,10 @@ seen by running the following code:
 python src/print_fires.py --help
 ```
 ```python
-usage: print_fires [-h] --file-name FILE_NAME --country-column COUNTRY_COLUMN
-                    --country COUNTRY [--fires-column FIRES_COLUMN]
-                   [--summary_function SUMMARY_FUNCTION]
+usage: print_fires [-h] --file-name FILE_NAME --country-column COUNTRY_COLUMN --country COUNTRY
+                   [--fires-column FIRES_COLUMN] [--summary_function SUMMARY_FUNCTION] [--write-file WRITE_FILE]
 
-Print results queired from the input file for the given country. Default prints fires column
-and does not summarize the results (prints integer list of all results).
+Default prints fires column and does not summarizethe results (prints integer list of all results).
 
 options:
   -h, --help            show this help message and exit
@@ -171,6 +169,9 @@ options:
                         Column number to query from the file
   --summary_function SUMMARY_FUNCTION
                         Function to summarize results, use "mean", "median", or "std_dev"
+  --write-file WRITE_FILE
+                        Option to write results to file
+
 ```
 
 In more detail, the inputs to print_fires.py are as follows:
@@ -186,9 +187,11 @@ In more detail, the inputs to print_fires.py are as follows:
     names column.
 + fires-column (optional) - the integer column number to query results from in
     the input file. The default value is 1. To note: the first column is column 0.
-+ summary_function (optional) - the string name of the function to summarize the
++ summary-function (optional) - the string name of the function to summarize the
     results from the input file. The default is to not summarize and to return
     a list of integers. The options are "mean", "median", and "std_dev".
++ write-file (optional) - the string name of the file to write results to. The
+    default is to not write results to a file.
 
 The script print_fires.py runs the following functions:
 
@@ -291,6 +294,92 @@ my_utils.get_std_dev.__doc__
     -------
     std_dev : float
         Standard deviation of the list of integers
+```
+
+The docustring for the write file function can be accessed by running the following
+in the Python interpreter, once inside the src/ directory:
+
+```python
+import my_utils
+my_utils.write_file.__doc__
+```
+
+```python
+    Writes a list of integers to a file.
+    Parameters
+    ---------
+    int_list : list of int
+        List of integers
+    file_name : str
+        Name of the file to write
+```
+
+
+### Script and Function Details - Plotting
+
+The usage of plot_fires.py can be seen by running the following code:
+
+```python
+python src/plot_fires.py --help
+```
+
+```python
+usage: plot_fires [-h] --file-name FILE_NAME --output-path OUTPUT_PATH --title TITLE --x-label X_LABEL --y-label Y_LABEL
+
+Makes plot of values from file from query.
+
+options:
+  -h, --help            show this help message and exit
+  --file-name FILE_NAME
+                        Name of file with query results
+  --output-path OUTPUT_PATH
+                        Path to write output file to
+  --title TITLE         Title to use for plot
+  --x-label X_LABEL     Label for x-axis
+  --y-label Y_LABEL     Label for y-axis
+```
+
+In more detail, the inputs to plot_fires.py are as follows:
+
++ file-name (required) - the name of the file to read given as a string. This
+    file should only contain one column of data, and is intended to be the
+    optional file written out with the query results of print_fires.py.
++ output-path (required) - the path to write the output file to. The output
+    file will be a PNG file.
++ title (required) - the string title to use for the plot.
++ x-label (required) - the string label to use for the x-axis.
++ y-label (required) - the string label to use for the y-axis.
+
+The script plot_fires.py runs the following functions:
+
+    * get_args - gets command line arguments.
+    * run_plot_hist - runs plot_hist from plot_utils.
+
+The run_plot_hist function runs the plot_hist function in plot_utils.py.
+
+The docustring for the plot_hist function can be accessed by running the following
+in the Python interpreter:
+
+```python
+import plot_utils
+plot_utils.plot_hist.__doc__
+```
+
+```python
+    Plots histogram of values in a file. Writes out as .png.
+
+    Parameters
+    ----------
+    file_name : str\
+        Name of the file to read
+    output_path : str
+        Path to write output file to
+    x_label : str
+        Label for x-axis
+    y_label : str
+        Label for y-axis
+    title : str
+        Title for plot
 ```
 
 ## **Small Scientific Presentation**
