@@ -8,3 +8,7 @@ dependencies:
   - wget
   - ca-certificates
   - openssl
+  - snakemake
+  - graphviz
+  - certifi
+  - matplotlib
