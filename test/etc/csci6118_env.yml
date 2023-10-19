@@ -6,5 +6,4 @@ dependencies:
   - python
   - pycodestyle
   - wget
-  - snakemake
   - matplotlib
