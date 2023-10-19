@@ -6,9 +6,5 @@ dependencies:
   - python
   - pycodestyle
   - wget
-  - ca-certificates
-  - openssl
   - snakemake
-  - graphviz
-  - certifi
   - matplotlib
