@@ -107,6 +107,24 @@ class TestMyUtils(unittest.TestCase):
     def test_get_std_dev_empty(self):
         self.assertRaises(ZeroDivisionError, my_utils.get_std_dev, [])
 
+    def test_write_file(self):
+        # Write non-empty file
+        my_utils.write_file([1, 3, 4, 2000], 'test_file.csv')
+
+        # Confirm not empty
+        with open('test_file.csv', 'r') as file:
+            file_content = file.read()
+        self.assertNotEqual(file_content, '')
+
+    def test_write_file_empty(self):
+        # Write empty file
+        my_utils.write_file([], 'test_file.csv')
+
+        # Confirm empty
+        with open('test_file.csv', 'r') as file:
+            file_content = file.read()
+        self.assertEqual(file_content, '')
+
 
 if __name__ == '__main__':
     unittest.main()
