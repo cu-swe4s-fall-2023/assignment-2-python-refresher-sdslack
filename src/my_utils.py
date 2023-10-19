@@ -5,6 +5,7 @@
     * get_mean - returns the mean of a list of integers.
     * get_median - returns the median of a list of integers.
     * get_std_dev - returns the standard deviation of a list of integers.
+    * write_file - writes a list of integers to a file.
 
 """
 
@@ -119,3 +120,19 @@ def get_std_dev(int_list):
     devs_sq_mean = get_mean(devs_sq)
     std_dev = math.sqrt(devs_sq_mean)
     return std_dev
+
+
+def write_file(int_list, file_name):
+    """Writes a list of integers to a file.
+
+    Parameters
+    ----------
+    int_list : list of int
+        List of integers
+    file_name : str
+        Name of the file to write
+
+    """
+    with open(file_name, 'w') as f:
+        for int in int_list:
+            f.write(str(int) + '\n')
