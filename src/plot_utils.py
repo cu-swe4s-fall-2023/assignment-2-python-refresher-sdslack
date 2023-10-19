@@ -28,8 +28,10 @@ def plot_hist(file_name, output_path, x_label, y_label, title):
 
     """
     data = []
-    for line in open(file_name):
-        data.append(int(line.rstrip()))  # assumes input has one column
+
+    with open(file_name, 'r') as f:
+        for line in f:
+            data.append(int(line.rstrip()))  # assumes input has one column
 
     data.sort()
     fig, ax = plt.subplots()

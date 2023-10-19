@@ -8,7 +8,7 @@ on:
          - '*'
 
 jobs:
-   run_unit_tests:
+   run_unit_tests_my_utils:
       runs-on: ubuntu-latest
       defaults:
          run:
@@ -18,8 +18,23 @@ jobs:
          - run: |
             cd test/unit
             python -m unittest test_my_utils
+   
+   run_unit_tests_plot_utils:
+      runs-on: ubuntu-latest
+      defaults:
+         run:
+            shell: bash -el {0} 
+      steps:
+         - uses: actions/checkout@v2
+         - uses: mamba-org/setup-micromamba@v1
+           with:
+               environment-file: test/etc/csci6118_env.yml
+               environment-name: csci6118
+         - run: |
+            cd test/unit
+            python -m unittest test_plot_utils
 
-   run_func_tests:
+   run_func_tests_print_fires:
       runs-on: ubuntu-latest
       defaults:
          run:
@@ -29,6 +44,21 @@ jobs:
          - run: |
             cd test/func
             bash test_print_fires.sh
+
+   run_func_tests_plot_fires:
+      runs-on: ubuntu-latest
+      defaults:
+         run:
+            shell: bash -el {0} 
+      steps:
+         - uses: actions/checkout@v2
+         - uses: mamba-org/setup-micromamba@v1
+           with:
+               environment-file: test/etc/csci6118_env.yml
+               environment-name: csci6118
+         - run: |
+            cd test/func
+            bash test_plot_fires.sh
 
    run_style_tests:
       runs-on: ubuntu-latest

@@ -6,5 +6,4 @@ dependencies:
   - python
   - pycodestyle
   - wget
-  - ca-certificates
-  - openssl
+  - matplotlib
