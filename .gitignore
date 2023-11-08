@@ -9,6 +9,7 @@ __pycache__/
 # User-specific files
 /data/
 .DS_Store
+test/func/ssshtest
 
 # Snakemake
 .snakemake/
