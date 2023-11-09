@@ -107,3 +107,10 @@ class TestLibUtils(unittest.TestCase):
         lib_utils.scatter_plot(country_df, country, country_col_name,
                                x_col_name, y_col_name, output_file)
         self.assertTrue(os.path.isfile('../docs/test_two_countries_scatter_plot.png'))
+
+    def test_merge_data(self):
+        # Specifically merging GDP data into agro file
+        agro_df = lib_utils.get_data('../data/test_Agrofood_co2_emission.csv')
+        gdp_df = lib_utils.get_data('../data/test_IMF_GDP.csv')
+        merged_df = lib_utils.merge_data(agro_df, gdp_df)
+        self.assertEqual(merged_df.shape[1], 33)  # should add 2 cols

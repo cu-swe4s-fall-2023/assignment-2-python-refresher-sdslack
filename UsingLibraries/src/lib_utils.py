@@ -106,3 +106,53 @@ def scatter_plot(country_df, country, country_col_name,
         ax.set_title(y_col_name + ' versus ' + x_col_name)
         ax.legend(loc='lower right')
     plt.savefig(output_file, bbox_inches='tight')
+
+def merge_data(agro_df, gdp_df):
+    """Merges dataframes, specifically GDP into AG data
+    
+    Parameters
+    ----------
+    agro_df: pandas.DataFrame
+        Dataframe with AG data
+        
+    gdp_df: pandas.DataFrame
+        Dataframe with GDP data
+
+    Returns
+    -------
+    agro_gdp_df: pandas.DataFrame
+        Dataframe with AG data and GDP data
+    """
+    # Melt GDP data so can merge
+    gdp_df_melt = pd.melt(gdp_df, id_vars=['Country'],var_name='Year',value_name='GDP')
+
+    # Update types after melt, replace ... values, remove commas
+    gdp_df_melt = gdp_df_melt.replace('...',None)
+    gdp_df_melt['Year'] = gdp_df_melt['Year'].astype('int64')
+    gdp_df_melt['Country'] = gdp_df_melt['Country'].astype('str')
+    for col in gdp_df_melt.columns:
+        if col == 'GDP':
+            gdp_df_melt[col] = gdp_df_melt[col].apply(destroy_commas)
+    gdp_df_melt['GDP'] = gdp_df_melt['GDP'].astype('float64')
+
+    # Merge into agro data
+    agro_gdp_df = pd.merge(agro_df, gdp_df_melt, how='inner',
+                           left_on=['Year', 'Area'], right_on=['Year', 'Country'])
+    return agro_gdp_df
+
+def destroy_commas(x):
+    """Replces commas with nothing
+
+    Parameters
+    ----------
+    x: str
+        String to remove commas from
+    
+    Returns
+    -------
+    float
+        String with commas removed
+    """
+    if x is None:
+        return None
+    return float(x.replace(',',''))
