@@ -74,3 +74,35 @@ def line_plot(country_df, country, country_col_name,
         ax.set_title(y_col_name + ' versus ' + x_col_name)
         ax.legend(loc='lower right')
     plt.savefig(output_file, bbox_inches='tight')
+
+
+def scatter_plot(country_df, country, country_col_name,
+                 x_col_name, y_col_name, output_file):
+    """Makes a scatter plot of the data
+
+    Parameters
+    ----------
+    country_df: pandas.DataFrame
+        Dataframe with information from selected country/countries
+    country: str, or list of str
+        Name of the country/countries to plot
+    country_col_name: str
+        Name of the column with the country names
+    x_col: str
+        Name of the column with the x data
+    y_col: str
+        Name of the column with the y data
+    output_file: str
+        Name of the file to save the plot to
+
+    """
+    fig, ax = plt.subplots()
+    # Add to plot for each country in list
+    for name in country:
+        name_df = country_df[country_df[country_col_name] == name]
+        ax.scatter(name_df[x_col_name],name_df[y_col_name],label=name)
+        ax.set_xlabel(x_col_name)
+        ax.set_ylabel(y_col_name)
+        ax.set_title(y_col_name + ' versus ' + x_col_name)
+        ax.legend(loc='lower right')
+    plt.savefig(output_file, bbox_inches='tight')

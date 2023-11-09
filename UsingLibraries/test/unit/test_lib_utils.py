@@ -95,3 +95,15 @@ class TestLibUtils(unittest.TestCase):
         lib_utils.scatter_plot(country_df, country, country_col_name,
                                x_col_name, y_col_name, output_file)
         self.assertTrue(os.path.isfile('../docs/test_one_country_scatter_plot.png'))
+
+    def test_scatter_plot_two_countries(self):
+        agro_df = lib_utils.get_data('../data/test_Agrofood_co2_emission.csv')
+        country = ['Brazil', 'Costa Rica']
+        country_col_name = 'Area'
+        country_df = lib_utils.get_country_data(agro_df, country, country_col_name)
+        x_col_name = 'Year'
+        y_col_name = 'total_emission'
+        output_file = '../docs/test_two_countries_scatter_plot.png'
+        lib_utils.scatter_plot(country_df, country, country_col_name,
+                               x_col_name, y_col_name, output_file)
+        self.assertTrue(os.path.isfile('../docs/test_two_countries_scatter_plot.png'))
