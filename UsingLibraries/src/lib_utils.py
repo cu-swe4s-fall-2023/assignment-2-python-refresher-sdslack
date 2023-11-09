@@ -88,8 +88,6 @@ def line_plot(country_df, country, country_col_name,
         ax.legend(loc='lower right')
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-    plt.savefig(output_file, bbox_inches='tight')
-    return ax
 
 
 def scatter_plot(country_df, country, country_col_name,
@@ -123,7 +121,6 @@ def scatter_plot(country_df, country, country_col_name,
         ax.legend(loc='lower right')
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-    plt.savefig(output_file, bbox_inches='tight')
 
 
 def merge_data(agro_df, gdp_df):

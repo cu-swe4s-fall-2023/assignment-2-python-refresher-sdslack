@@ -1,6 +1,11 @@
 """Makes report on AG and GDP data
 
-        * TBD
+        * get_args - gets command line arguments.
+        * plot_avg_temp - plots average temperature over time for selected countries.
+        * plot_year_vs_emissions - plots year versus emissions for selected countries.
+        * plot_gdp_vs_emissions - plots GDP versus emissions for selected countries.
+        * plot_pop - plots population over time for selected countries.
+        * make_figure - makes figure for report.
 
 """
 
