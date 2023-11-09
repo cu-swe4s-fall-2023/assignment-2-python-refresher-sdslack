@@ -126,8 +126,9 @@ def merge_data(agro_df, gdp_df):
     # Melt GDP data so can merge
     gdp_df_melt = pd.melt(gdp_df, id_vars=['Country'],var_name='Year',value_name='GDP')
 
-    # Update types after melt, replace ... values, remove commas
+    # Update types after melt, replace ... & - values, remove commas
     gdp_df_melt = gdp_df_melt.replace('...',None)
+    gdp_df_melt = gdp_df_melt.replace('-',None)
     gdp_df_melt['Year'] = gdp_df_melt['Year'].astype('int64')
     gdp_df_melt['Country'] = gdp_df_melt['Country'].astype('str')
     for col in gdp_df_melt.columns:

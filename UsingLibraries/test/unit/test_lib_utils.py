@@ -114,3 +114,4 @@ class TestLibUtils(unittest.TestCase):
         gdp_df = lib_utils.get_data('../data/test_IMF_GDP.csv')
         merged_df = lib_utils.merge_data(agro_df, gdp_df)
         self.assertEqual(merged_df.shape[1], 33)  # should add 2 cols
+
