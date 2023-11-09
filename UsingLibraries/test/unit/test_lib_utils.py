@@ -8,6 +8,14 @@ import lib_utils
 
 class TestLibUtils(unittest.TestCase):
 
+    def setUp(self):
+        self.empty_test_file = 'empty_test_file.csv'
+        f = open(self.empty_test_file, 'w')
+        f.close()
+
+    def tearDown(self):
+        os.remove(self.empty_test_file)
+
     def test_get_data(self):
         # Using small test files instead of making new to preserve
         # the formatting in target files
@@ -15,6 +23,14 @@ class TestLibUtils(unittest.TestCase):
         gdp_df = lib_utils.get_data('../data/test_IMF_GDP.csv')
         self.assertEqual(agro_df.shape, (26, 31))
         self.assertEqual(gdp_df.shape, (3, 40))
+
+    def test_get_data_dne(self):
+        self.assertRaises(FileNotFoundError, lib_utils.get_data,
+                          '../data/dne_test_file.csv')
+    
+    def test_get_data_empty(self):
+        self.assertRaises(ValueError, lib_utils.get_data,
+                          self.empty_test_file)
 
     def test_get_country_data_agro(self):
         agro_df = lib_utils.get_data('../data/test_Agrofood_co2_emission.csv')
