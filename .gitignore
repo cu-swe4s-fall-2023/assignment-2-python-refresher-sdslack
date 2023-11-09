@@ -9,6 +9,11 @@ __pycache__/
 # User-specific files
 /data/
 .DS_Store
+test/func/ssshtest
+UsingLibraries/test/docs/
+
+# Snakemake
+.snakemake/
 
 # Distribution / packaging
 .Python
