@@ -35,8 +35,8 @@ class TestLibUtils(unittest.TestCase):
         country = 'Brazil'
         country_col_name = 'Area'
         country_df = lib_utils.get_country_data(agro_df, country, country_col_name)
-        x_col = 'Year'
-        y_col = 'Average Temperature ¬∞C'
-        output_file = 'test_line_plot.png'
-        lib_utils.line_plot(country_df, country, country_col_name,
-                            x_col, y_col, output_file)
+        x_col_name = 'Year'
+        y_col_name = 'Average Temperature °C'
+        output_file = '../docs/test_line_plot.png'
+        lib_utils.line_plot(country_df, country, x_col_name, y_col_name, output_file)
+        self.assertTrue(os.path.isfile('../docs/test_line_plot.png'))
