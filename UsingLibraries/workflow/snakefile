@@ -1,0 +1,16 @@
+COUNTRIES = 'United States of America,Mexico,Canada,Guatemala,Costa Rica'
+
+rule all:
+    input:
+        'docs_snake/figure.png'
+
+rule make_figure:
+    input:
+        "../data/Agrofood_co2_emission.csv",
+        "../data/IMF_GDP.csv"
+    output:
+        "docs_snake/figure.png"
+    shell:
+        "python src/make_report.py --ag-file-name {input[0]} "
+        + "--gdp-file-name {input[1]} --output-path docs_snake "
+        + "--countries '{COUNTRIES}'"
