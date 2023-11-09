@@ -163,7 +163,8 @@ def make_figure(args):
     plot_pop(args, ax4)
     ax4.legend(fontsize='small', loc='lower right')
     plt.tight_layout()
-    plt.show()
+    output_file = args.output_path + '/figure.png'
+    plt.savefig(output_file, bbox_inches='tight')
 
 
 if __name__ == '__main__':
