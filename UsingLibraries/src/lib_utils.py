@@ -5,20 +5,38 @@
 """
 import pandas as pd
 
-def get_data(agro_file, gdp_file):
+def get_data(file_path):
     """Gets data from files
     
     Parameters
     ----------
-    agro_file: str
-        Name of the agriculture file to read
-    gdp_file: str
-        Name of the GDP file to read
+    file_path: str
+        Name of the file to read
 
     Returns
     -------
-    
+    df: pandas.DataFrame
+        Dataframe of the file
+
     """
-    agro_df = pd.read_csv(agro_file)
-    gdp_df = pd.read_csv(gdp_file)
-    return agro_df, gdp_df
+    df = pd.read_csv(file_path)
+    return df
+
+def get_country_data(df, country, country_col_name):
+    """Gets data for a specific country
+    
+    Parameters
+    ----------
+    df: pandas.DataFrame
+        Dataframe of the file
+    country: str
+        Name of the country to get data for
+
+    Returns
+    -------
+    country_df: pandas.DataFrame
+        Dataframe with only information from that country
+
+    """
+    country_df = df[df[country_col_name] == country]
+    return country_df
